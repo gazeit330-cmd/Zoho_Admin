@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoho Kiosk Admin Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:#111827;
+    color:white;
+    padding:25px 0;
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:40px;
+}
+
+.logo span{
+    color:#FFD166;
+}
+
+.menu{
+    list-style:none;
+}
+
+.menu li{
+    padding:16px 30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.menu li:hover{
+    background:#1f2937;
+}
+
+.menu li.active{
+    background:#2e7d32;
+}
+
+/* MAIN CONTENT */
+
+.main{
+    margin-left:260px;
+    min-height:100vh;
+}
+
+/* TOPBAR */
+
+.topbar{
+    background:white;
+    padding:20px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.admin-info{
+    font-weight:600;
+}
+
+.logout-btn{
+    border:none;
+    background:#ef4444;
+    color:white;
+    padding:10px 20px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* PAGE TITLE */
+
+.page-title{
+    padding:30px;
+}
+
+.page-title h1{
+    font-size:32px;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    padding:0 30px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.06);
+}
+
+.card h3{
+    color:#777;
+    margin-bottom:10px;
+}
+
+.card h1{
+    color:#111827;
+    font-size:34px;
+}
+
+/* TABLE SECTION */
+
+.section{
+    margin:30px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.06);
+}
+
+.section h2{
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th{
+    text-align:left;
+    background:#f4f6f9;
+    padding:14px;
+}
+
+table td{
+    padding:14px;
+    border-bottom:1px solid #eee;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.sidebar{
+    width:100%;
+    height:auto;
+    position:relative;
+}
+
+.main{
+    margin-left:0;
+}
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+.topbar{
+    flex-direction:column;
+    gap:15px;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        🍴 ZOHO <span>KIOSK</span>
+    </div>
+
+    <ul class="menu">
+
+        <li class="active">🏠 Dashboard</li>
+
+        <li onclick="location.href='add-item.html'">
+            📦 Add Item
+        </li>
+
+        <li onclick="location.href='view-items.html'">
+            📋 View Items
+        </li>
+
+        <li onclick="location.href='orders.html'">
+            🛒 Orders
+        </li>
+
+        <li onclick="location.href='customers.html'">
+            👥 Customers
+        </li>
+        
+        <li onclick="location.href='inventory.html'">
+    🥦 Inventory
+</li>
+
+        <li onclick="location.href='reports.html'">
+            📊 Reports
+        </li>
+
+        <li onclick="location.href='settings.html'">
+            ⚙ Settings
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div class="admin-info">
+            Welcome Admin 👋
+        </div>
+
+        <button class="logout-btn">
+            Logout
+        </button>
+
+    </div>
+
+    <div class="page-title">
+
+        <h1>Dashboard Overview</h1>
+
+    </div>
+
+    <!-- CARDS -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Items</h3>
+            <h1>150</h1>
+        </div>
+
+        <div class="card">
+            <h3>Orders Today</h3>
+            <h1>45</h1>
+        </div>
+
+        <div class="card">
+            <h3>Total Customers</h3>
+            <h1>120</h1>
+        </div>
+
+        <div class="card">
+            <h3>Revenue</h3>
+            <h1>₹45K</h1>
+        </div>
+
+    </div>
+
+    <!-- RECENT ORDERS -->
+
+    <div class="section">
+
+        <h2>Recent Orders</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>ZK1001</td>
+                    <td>Sakshi</td>
+                    <td>₹860</td>
+                    <td>Completed</td>
+                </tr>
+
+                <tr>
+                    <td>ZK1002</td>
+                    <td>Amit</td>
+                    <td>₹540</td>
+                    <td>Completed</td>
+                </tr>
+
+                <tr>
+                    <td>ZK1003</td>
+                    <td>Rahul</td>
+                    <td>₹920</td>
+                    <td>Pending</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- TOP SELLING -->
+
+    <div class="section">
+
+        <h2>Top Selling Items</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Item Name</th>
+                    <th>Orders</th>
+                    <th>Revenue</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Margherita Pizza</td>
+                    <td>45</td>
+                    <td>₹18,900</td>
+                </tr>
+
+                <tr>
+                    <td>Veg Burger</td>
+                    <td>40</td>
+                    <td>₹8,800</td>
+                </tr>
+
+                <tr>
+                    <td>Pasta Alfredo</td>
+                    <td>35</td>
+                    <td>₹12,250</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

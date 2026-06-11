@@ -1,0 +1,16 @@
+
+{
+  "service": "ZohoCreator",
+  "type": "widget",
+  "widget": {
+    "name": "Zoho Kiosk",
+    "url": "/app/index.html"
+  },
+  "cspDomains": {
+    "connect-src": [
+      "https://127.0.0.1:5000",
+      "https://www.zohoapis.in",
+      "https://accounts.zoho.in"
+    ]
+  }
+}

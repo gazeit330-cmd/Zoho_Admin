@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>View Items</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:#111827;
+    color:white;
+}
+
+.logo{
+    text-align:center;
+    padding:25px;
+    font-size:28px;
+    font-weight:700;
+}
+
+.logo span{
+    color:#FFD166;
+}
+
+.menu{
+    list-style:none;
+}
+
+.menu li{
+    padding:16px 30px;
+    cursor:pointer;
+}
+
+.menu li:hover{
+    background:#1f2937;
+}
+
+.menu li.active{
+    background:#2e7d32;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:260px;
+    padding:30px;
+}
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:34px;
+}
+
+/* SEARCH */
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.search-box input{
+    width:100%;
+    height:50px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:0 15px;
+    font-size:15px;
+}
+
+/* TABLE */
+
+.table-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#111827;
+    color:white;
+    padding:16px;
+    text-align:left;
+}
+
+td{
+    padding:16px;
+    border-bottom:1px solid #eee;
+}
+
+.item-image{
+    width:60px;
+    height:60px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+/* BUTTONS */
+
+.edit-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.delete-btn{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* STATUS */
+
+.status{
+    background:#dcfce7;
+    color:#15803d;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+/* PAGINATION */
+
+.pagination{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:25px;
+}
+
+.page-btn{
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:white;
+}
+
+.page-btn.active{
+    background:#2e7d32;
+    color:white;
+}
+
+@media(max-width:768px){
+
+.sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+}
+
+.main{
+    margin-left:0;
+}
+
+.table-card{
+    overflow:auto;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        🍴 ZOHO <span>KIOSK</span>
+    </div>
+
+    <ul class="menu">
+
+    <li onclick="location.href='dashboard.html'">
+        🏠 Dashboard
+    </li>
+
+    <li onclick="location.href='add-item.html'">
+        📦 Add Item
+    </li>
+
+    <li class="active">
+        📋 View Items
+    </li>
+
+    <li onclick="location.href='orders.html'">
+        🛒 Orders
+    </li>
+
+    <li onclick="location.href='customers.html'">
+        👥 Customers
+    </li>
+    <li onclick="location.href='inventory.html'">
+    🥦 Inventory
+</li>
+
+    <li onclick="location.href='reports.html'">
+        📊 Reports
+    </li>
+
+    <li onclick="location.href='settings.html'">
+        ⚙ Settings
+    </li>
+
+</ul>
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="page-title">
+
+        <h1>View Items</h1>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Item..."
+        onkeyup="searchItem()">
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+        <table id="itemTable">
+
+            <thead>
+
+                <tr>
+
+                    <th>Image</th>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>SKU</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        <img
+                        class="item-image"
+                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
+                    </td>
+
+                    <td>Veg Burger</td>
+                    <td>Main Course</td>
+                    <td>₹220</td>
+                    <td>VB001</td>
+
+                    <td>
+                        <span class="status">
+                        Active
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button class="edit-btn">
+                            Edit
+                        </button>
+
+                        <button
+                        class="delete-btn"
+                        onclick="deleteItem(this)">
+                            Delete
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <img
+                        class="item-image"
+                        src="https://images.unsplash.com/photo-1513104890138-7c749659a591">
+                    </td>
+
+                    <td>Margherita Pizza</td>
+                    <td>Main Course</td>
+                    <td>₹420</td>
+                    <td>MP001</td>
+
+                    <td>
+                        <span class="status">
+                        Active
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button class="edit-btn">
+                            Edit
+                        </button>
+
+                        <button
+                        class="delete-btn"
+                        onclick="deleteItem(this)">
+                            Delete
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <img
+                        class="item-image"
+                        src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9">
+                    </td>
+
+                    <td>Pasta Alfredo</td>
+                    <td>Main Course</td>
+                    <td>₹350</td>
+                    <td>PA001</td>
+
+                    <td>
+                        <span class="status">
+                        Active
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button class="edit-btn">
+                            Edit
+                        </button>
+
+                        <button
+                        class="delete-btn"
+                        onclick="deleteItem(this)">
+                            Delete
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- PAGINATION -->
+
+    <div class="pagination">
+
+        <button class="page-btn active">
+            1
+        </button>
+
+        <button class="page-btn">
+            2
+        </button>
+
+        <button class="page-btn">
+            3
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function searchItem()
+{
+    let input =
+    document.getElementById("searchInput")
+    .value.toLowerCase();
+
+    let rows =
+    document.querySelectorAll(
+    "#itemTable tbody tr"
+    );
+
+    rows.forEach(row=>{
+
+        let itemName =
+        row.cells[1].innerText
+        .toLowerCase();
+
+        if(itemName.includes(input))
+        {
+            row.style.display="";
+        }
+        else
+        {
+            row.style.display="none";
+        }
+
+    });
+}
+
+function deleteItem(button)
+{
+    if(confirm("Delete Item?"))
+    {
+        button.closest("tr").remove();
+    }
+}
+
+</script>
+
+</body>
+</html>

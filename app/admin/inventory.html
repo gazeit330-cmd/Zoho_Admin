@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Inventory Management</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:#111827;
+    color:white;
+}
+
+.logo{
+    text-align:center;
+    padding:25px;
+    font-size:28px;
+    font-weight:700;
+}
+
+.logo span{
+    color:#FFD166;
+}
+
+.menu{
+    list-style:none;
+}
+
+.menu li{
+    padding:16px 30px;
+    cursor:pointer;
+}
+
+.menu li:hover{
+    background:#1f2937;
+}
+
+.menu li.active{
+    background:#2e7d32;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:260px;
+    padding:30px;
+}
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:34px;
+    color:#111827;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+/* TOP BAR */
+
+.top-actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.search-box{
+    width:300px;
+}
+
+.search-box input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.add-btn{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.add-btn:hover{
+    background:#256428;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#111827;
+    color:white;
+    padding:15px;
+    text-align:left;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #eee;
+}
+
+.stock-good{
+    background:#dcfce7;
+    color:#15803d;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+.stock-low{
+    background:#fef3c7;
+    color:#92400e;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+.stock-out{
+    background:#fee2e2;
+    color:#b91c1c;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+/* BUTTONS */
+
+.edit-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.adjust-btn{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* SUMMARY CARDS */
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.summary-card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.summary-card h3{
+    color:#666;
+    margin-bottom:10px;
+}
+
+.summary-card h1{
+    color:#111827;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+}
+
+.main{
+    margin-left:0;
+}
+
+.card{
+    overflow:auto;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        🍴 ZOHO <span>KIOSK</span>
+    </div>
+
+    <ul class="menu">
+
+        <li onclick="location.href='dashboard.html'">
+            🏠 Dashboard
+        </li>
+
+        <li onclick="location.href='add-item.html'">
+            📦 Add Item
+        </li>
+
+        <li onclick="location.href='view-items.html'">
+            📋 View Items
+        </li>
+
+        <li onclick="location.href='orders.html'">
+            🛒 Orders
+        </li>
+
+        <li onclick="location.href='customers.html'">
+            👥 Customers
+        </li>
+
+        <li class="active">
+            🥦 Inventory
+        </li>
+        <li onclick="location.href='inventory.html'">
+    🥦 Inventory
+</li>
+
+        <li onclick="location.href='reports.html'">
+            📊 Reports
+        </li>
+
+        <li onclick="location.href='settings.html'">
+            ⚙ Settings
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="page-title">
+        <h1>Inventory Management</h1>
+    </div>
+
+    <!-- SUMMARY -->
+
+    <div class="summary">
+
+        <div class="summary-card">
+            <h3>Total Items</h3>
+            <h1>120</h1>
+        </div>
+
+        <div class="summary-card">
+            <h3>Low Stock</h3>
+            <h1>15</h1>
+        </div>
+
+        <div class="summary-card">
+            <h3>Out Of Stock</h3>
+            <h1>4</h1>
+        </div>
+
+        <div class="summary-card">
+            <h3>Inventory Value</h3>
+            <h1>₹85,000</h1>
+        </div>
+
+    </div>
+
+    <!-- TABLE CARD -->
+
+    <div class="card">
+
+        <div class="top-actions">
+
+            <div class="search-box">
+                <input
+                type="text"
+                id="searchInput"
+                placeholder="Search Grocery Item..."
+                onkeyup="searchItem()">
+            </div>
+
+            <button class="add-btn">
+                + Add Inventory
+            </button>
+
+        </div>
+
+        <table id="inventoryTable">
+
+            <thead>
+
+                <tr>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Unit</th>
+                    <th>Available Stock</th>
+                    <th>Reorder Level</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Tomato</td>
+                    <td>Vegetables</td>
+                    <td>Kg</td>
+                    <td>55</td>
+                    <td>20</td>
+                    <td>
+                        <span class="stock-good">
+                            In Stock
+                        </span>
+                    </td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="adjust-btn">Adjust</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Milk</td>
+                    <td>Dairy</td>
+                    <td>Litre</td>
+                    <td>8</td>
+                    <td>15</td>
+                    <td>
+                        <span class="stock-low">
+                            Low Stock
+                        </span>
+                    </td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="adjust-btn">Adjust</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Cheese</td>
+                    <td>Dairy</td>
+                    <td>Packet</td>
+                    <td>0</td>
+                    <td>10</td>
+                    <td>
+                        <span class="stock-out">
+                            Out Of Stock
+                        </span>
+                    </td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="adjust-btn">Adjust</button>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+function searchItem()
+{
+    let input =
+    document.getElementById("searchInput")
+    .value.toLowerCase();
+
+    let rows =
+    document.querySelectorAll(
+    "#inventoryTable tbody tr"
+    );
+
+    rows.forEach(row=>{
+
+        let item =
+        row.cells[0].innerText
+        .toLowerCase();
+
+        row.style.display =
+        item.includes(input)
+        ? ""
+        : "none";
+
+    });
+}
+
+</script>
+
+</body>
+</html>

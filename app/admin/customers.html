@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Customers Management</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:#111827;
+    color:white;
+    padding:25px 0;
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:40px;
+}
+
+.logo span{
+    color:#FFD166;
+}
+
+.menu{
+    list-style:none;
+}
+
+.menu li{
+    padding:16px 30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.menu li:hover{
+    background:#1f2937;
+}
+
+.menu li.active{
+    background:#2e7d32;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:260px;
+    min-height:100vh;
+}
+
+/* TOPBAR */
+
+.topbar{
+    background:white;
+    padding:20px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.admin-info{
+    font-weight:600;
+}
+
+.logout-btn{
+    border:none;
+    background:#ef4444;
+    color:white;
+    padding:10px 20px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* PAGE TITLE */
+
+.page-title{
+    padding:30px;
+}
+
+.page-title h1{
+    font-size:32px;
+    color:#111827;
+}
+
+/* SECTION */
+
+.section{
+    margin:0 30px 30px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.06);
+}
+
+/* TOOLBAR */
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.toolbar input{
+    width:300px;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.add-btn{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#f4f6f9;
+    text-align:left;
+    padding:14px;
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid #eee;
+}
+
+/* STATUS */
+
+.status{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.active-status{
+    background:#d4edda;
+    color:#155724;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.sidebar{
+    width:100%;
+    height:auto;
+    position:relative;
+}
+
+.main{
+    margin-left:0;
+}
+
+.topbar{
+    flex-direction:column;
+    gap:15px;
+}
+
+.toolbar{
+    flex-direction:column;
+    align-items:stretch;
+}
+
+.toolbar input{
+    width:100%;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        🍴 ZOHO <span>KIOSK</span>
+    </div>
+
+    <ul class="menu">
+
+        <li onclick="location.href='dashboard.html'">
+            🏠 Dashboard
+        </li>
+
+        <li onclick="location.href='add-item.html'">
+            📦 Add Item
+        </li>
+
+        <li onclick="location.href='view-items.html'">
+            📋 View Items
+        </li>
+
+        <li onclick="location.href='orders.html'">
+            🛒 Orders
+        </li>
+
+        <li class="active">
+            👥 Customers
+        </li>
+        <li onclick="location.href='inventory.html'">
+    🥦 Inventory
+</li>
+
+        <li onclick="location.href='reports.html'">
+            📊 Reports
+        </li>
+
+        <li onclick="location.href='settings.html'">
+            ⚙ Settings
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <div class="admin-info">
+            Welcome Admin 👋
+        </div>
+
+        <button class="logout-btn">
+            Logout
+        </button>
+
+    </div>
+
+    <div class="page-title">
+        <h1>Customer Management</h1>
+    </div>
+
+    <div class="section">
+
+        <div class="toolbar">
+
+            <input
+            type="text"
+            placeholder="Search Customer">
+
+            <button class="add-btn">
+                Add Customer
+            </button>
+
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Total Orders</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>CUST001</td>
+                    <td>Sakshi Kumari</td>
+                    <td>9876543210</td>
+                    <td>sakshi@gmail.com</td>
+                    <td>12</td>
+                    <td>
+                        <span class="status active-status">
+                            Active
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>CUST002</td>
+                    <td>Amit Sharma</td>
+                    <td>9988776655</td>
+                    <td>amit@gmail.com</td>
+                    <td>8</td>
+                    <td>
+                        <span class="status active-status">
+                            Active
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>CUST003</td>
+                    <td>Rahul Verma</td>
+                    <td>9123456789</td>
+                    <td>rahul@gmail.com</td>
+                    <td>5</td>
+                    <td>
+                        <span class="status active-status">
+                            Active
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>CUST004</td>
+                    <td>Priya Singh</td>
+                    <td>9988112233</td>
+                    <td>priya@gmail.com</td>
+                    <td>9</td>
+                    <td>
+                        <span class="status active-status">
+                            Active
+                        </span>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

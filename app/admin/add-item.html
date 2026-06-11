@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Item</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:#111827;
+    color:white;
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:700;
+    padding:25px;
+}
+
+.logo span{
+    color:#FFD166;
+}
+
+.menu{
+    list-style:none;
+}
+
+.menu li{
+    padding:16px 30px;
+    cursor:pointer;
+}
+
+.menu li:hover{
+    background:#1f2937;
+}
+
+.menu li.active{
+    background:#2e7d32;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:260px;
+    padding:30px;
+}
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:34px;
+    color:#111827;
+}
+
+/* FORM CARD */
+
+.form-card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:14px;
+    font-size:15px;
+}
+
+.form-group textarea{
+    resize:none;
+    height:120px;
+}
+
+.full-width{
+    grid-column:1 / -1;
+}
+
+.image-upload{
+    border:2px dashed #ccc;
+    border-radius:15px;
+    padding:40px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.image-upload:hover{
+    border-color:#2e7d32;
+}
+
+.save-btn{
+    margin-top:30px;
+    width:100%;
+    height:60px;
+    border:none;
+    border-radius:12px;
+    background:#2e7d32;
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.save-btn:hover{
+    background:#256428;
+}
+
+.preview{
+    margin-top:20px;
+    text-align:center;
+}
+
+.preview img{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:15px;
+    display:none;
+}
+
+@media(max-width:768px){
+
+.form-grid{
+    grid-template-columns:1fr;
+}
+
+.sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+}
+
+.main{
+    margin-left:0;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        🍴 ZOHO <span>KIOSK</span>
+    </div>
+
+    <ul class="menu">
+
+        <li onclick="location.href='dashboard.html'">
+            🏠 Dashboard
+        </li>
+
+        <li class="active">
+            📦 Add Item
+        </li>
+
+        <li onclick="location.href='view-items.html'">
+            📋 View Items
+        </li>
+
+        <li onclick="location.href='orders.html'">
+            🛒 Orders
+        </li>
+
+        <li onclick="location.href='customers.html'">
+            👥 Customers
+        </li>
+        <li onclick="location.href='inventory.html'">
+    🥦 Inventory
+</li>
+
+        <li onclick="location.href='reports.html'">
+            📊 Reports
+        </li>
+
+        <li onclick="location.href='settings.html'">
+            ⚙ Settings
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+    <div class="page-title">
+        <h1>Add New Item</h1>
+    </div>
+
+    <div class="form-card">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Item Name</label>
+                <input type="text" id="itemName">
+            </div>
+
+            <div class="form-group">
+                <label>SKU</label>
+                <input type="text" id="sku">
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+
+                <select id="category">
+
+                    <option>Starter</option>
+                    <option>Main Course</option>
+                    <option>Dessert</option>
+                    <option>Beverage</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label>Unit</label>
+
+                <select id="unit">
+
+                    <option>Nos</option>
+                    <option>Plate</option>
+                    <option>Glass</option>
+                    <option>Bowl</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label>Selling Price</label>
+                <input type="number" id="price">
+            </div>
+
+            <div class="form-group">
+                <label>GST</label>
+
+                <select id="gst">
+
+                    <option>0%</option>
+                    <option>5%</option>
+                    <option>12%</option>
+                    <option>18%</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label>Description</label>
+
+                <textarea id="description"></textarea>
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label>Food Image</label>
+
+                <input
+                type="file"
+                id="imageFile"
+                accept="image/*"
+                onchange="previewImage(event)">
+
+            </div>
+
+        </div>
+
+        <div class="preview">
+
+            <img id="previewImage">
+
+        </div>
+
+        <button class="save-btn"
+        onclick="saveItem()">
+
+            Save Item
+
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function previewImage(event)
+{
+    let image =
+    document.getElementById("previewImage");
+
+    image.src =
+    URL.createObjectURL(event.target.files[0]);
+
+    image.style.display="block";
+}
+
+async function saveItem()
+{
+    const itemData = {
+
+        item_name:
+        document.getElementById("itemName").value,
+
+        sku:
+        document.getElementById("sku").value,
+
+        rate:
+        document.getElementById("price").value,
+
+        description:
+        document.getElementById("description").value
+    };
+
+    try {
+
+        const response = await fetch(
+            "/create-item",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(itemData)
+            }
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+
+        alert("Item Created Successfully!");
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert("Error Creating Item");
+
+    }
+}
+</script>
+
+</body>
+</html>
