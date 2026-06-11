@@ -8,7 +8,7 @@
   },
   "cspDomains": {
     "connect-src": [
-      "https://127.0.0.1:5000",
+      "https://zohoadmin-production.up.railway.app",
       "https://www.zohoapis.in",
       "https://accounts.zoho.in"
     ]
