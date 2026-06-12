@@ -1,8 +1,13 @@
 {
-	"command": "echo Please specify the start-up command in the app-config.json file under the key command for AppSail $X_ZC_RESOURCE_NAME",
-	"build_path": "server",
+	"command": "node server/index.js",
+	"build_path": ".",
 	"stack": "node22",
-	"env_variables": {},
+	"env_variables": {
+		"REFRESH_TOKEN": "1000.17925a835b2ce135d79e8b2267153d33.59de0e9b13d7385538ce29402df0fb80",
+		"CLIENT_ID": "1000.1RIDM93W6N72TJFEF9OL15SYHTAZSI",
+		"CLIENT_SECRET": "954260a4dd41a4ab4012734eb112ee9efe7f8d20e9",
+		"ORGANIZATION_ID": "60071563444"
+	},
 	"memory": 256,
 	"scripts": {}
 }
