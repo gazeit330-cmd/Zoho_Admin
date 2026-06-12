@@ -389,10 +389,28 @@ function searchItem() {
   });
 }
 
-function deleteItem(button, itemId) {
-  if (confirm("Delete Item?")) {
-    button.closest("tr").remove();
-    // TODO: call DELETE /delete-item API if needed
+async function deleteItem(button, itemId) {
+  if (confirm("Delete this item from Zoho Books?")) {
+    try {
+
+      const response = await fetch(
+        `${API}/delete-item/${itemId}`,
+        { method: "DELETE" }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        button.closest("tr").remove();
+        alert("Item deleted from Zoho Books!");
+      } else {
+        alert("Failed to delete: " + (data.message || "Unknown error"));
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Error deleting item");
+    }
   }
 }
 

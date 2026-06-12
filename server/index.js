@@ -87,6 +87,27 @@ expressApp.get('/get-items', async (req, res) => {
   }
 });
 
+expressApp.delete('/delete-item/:itemId', async (req, res) => {
+  try {
+    const accessToken = await getAccessToken();
+    const { itemId } = req.params;
+
+    const response = await axios.delete(
+      `https://www.zohoapis.in/books/v3/items/${itemId}?organization_id=${process.env.ORGANIZATION_ID}`,
+      {
+        headers: { Authorization: `Zoho-oauthtoken ${accessToken}` }
+      }
+    );
+
+    res.json(response.data);
+
+  } catch (error) {
+    console.log("Delete Error:", error.response?.data || error.message);
+    res.status(500).json(error.response?.data || error.message);
+  }
+});
+
+
 
 
 /* =====================================
