@@ -111,9 +111,9 @@ expressApp.delete('/delete-item/:itemId', async (req, res) => {
 
 
 /* =====================================
-   START SERVER (Railway compatible)
+   START SERVER 
 ===================================== */
-const port = process.env.PORT || 5000;
-expressApp.listen(port, '0.0.0.0', () => {
+const port = process.env.X_ZOHO_CATALYST_LISTEN_PORT || 9000;
+expressApp.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
