@@ -70,6 +70,25 @@ expressApp.post('/create-item', async (req, res) => {
   }
 });
 
+
+expressApp.get('/get-items', async (req, res) => {
+  try {
+    const accessToken = await getAccessToken();
+    const response = await axios.get(
+      `https://www.zohoapis.in/books/v3/items?organization_id=${process.env.ORGANIZATION_ID}`,
+      {
+        headers: { Authorization: `Zoho-oauthtoken ${accessToken}` }
+      }
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.log("Error fetching items:", error.response?.data || error.message);
+    res.status(500).json(error.response?.data || error.message);
+  }
+});
+
+
+
 /* =====================================
    START SERVER (Railway compatible)
 ===================================== */

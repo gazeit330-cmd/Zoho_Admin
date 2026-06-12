@@ -293,114 +293,8 @@ td{
 
             </thead>
 
-            <tbody>
-
-                <tr>
-
-                    <td>
-                        <img
-                        class="item-image"
-                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
-                    </td>
-
-                    <td>Veg Burger</td>
-                    <td>Main Course</td>
-                    <td>₹220</td>
-                    <td>VB001</td>
-
-                    <td>
-                        <span class="status">
-                        Active
-                        </span>
-                    </td>
-
-                    <td>
-
-                        <button class="edit-btn">
-                            Edit
-                        </button>
-
-                        <button
-                        class="delete-btn"
-                        onclick="deleteItem(this)">
-                            Delete
-                        </button>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>
-                        <img
-                        class="item-image"
-                        src="https://images.unsplash.com/photo-1513104890138-7c749659a591">
-                    </td>
-
-                    <td>Margherita Pizza</td>
-                    <td>Main Course</td>
-                    <td>₹420</td>
-                    <td>MP001</td>
-
-                    <td>
-                        <span class="status">
-                        Active
-                        </span>
-                    </td>
-
-                    <td>
-
-                        <button class="edit-btn">
-                            Edit
-                        </button>
-
-                        <button
-                        class="delete-btn"
-                        onclick="deleteItem(this)">
-                            Delete
-                        </button>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>
-                        <img
-                        class="item-image"
-                        src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9">
-                    </td>
-
-                    <td>Pasta Alfredo</td>
-                    <td>Main Course</td>
-                    <td>₹350</td>
-                    <td>PA001</td>
-
-                    <td>
-                        <span class="status">
-                        Active
-                        </span>
-                    </td>
-
-                    <td>
-
-                        <button class="edit-btn">
-                            Edit
-                        </button>
-
-                        <button
-                        class="delete-btn"
-                        onclick="deleteItem(this)">
-                            Delete
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            </tbody>
+            <tbody id="itemTableBody">
+       </tbody>
 
         </table>
 
@@ -428,42 +322,82 @@ td{
 
 <script>
 
-function searchItem()
-{
-    let input =
-    document.getElementById("searchInput")
-    .value.toLowerCase();
+const API = "https://zohoadmin-production.up.railway.app";
 
-    let rows =
-    document.querySelectorAll(
-    "#itemTable tbody tr"
-    );
+async function loadItems() {
+  try {
+    const response = await fetch(`${API}/get-items`);
+    const data = await response.json();
+    const items = data.items || [];
+    const tbody = document.getElementById("itemTableBody");
 
-    rows.forEach(row=>{
-
-        let itemName =
-        row.cells[1].innerText
-        .toLowerCase();
-
-        if(itemName.includes(input))
-        {
-            row.style.display="";
-        }
-        else
-        {
-            row.style.display="none";
-        }
-
-    });
-}
-
-function deleteItem(button)
-{
-    if(confirm("Delete Item?"))
-    {
-        button.closest("tr").remove();
+    if (items.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7" style="text-align:center;padding:30px;color:#888">
+            No items found
+          </td>
+        </tr>`;
+      return;
     }
+
+    tbody.innerHTML = items.map(item => `
+      <tr>
+        <td>
+          <div style="width:60px;height:60px;background:#f0f0f0;
+          border-radius:10px;display:flex;align-items:center;
+          justify-content:center;font-size:24px;">
+            🍽️
+          </div>
+        </td>
+        <td>${item.name}</td>
+        <td>${item.item_type || 'N/A'}</td>
+        <td>₹${item.rate}</td>
+        <td>${item.sku || 'N/A'}</td>
+        <td>
+          <span class="status">
+            ${item.status === 'active' ? 'Active' : item.status}
+          </span>
+        </td>
+        <td>
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn"
+            onclick="deleteItem(this, '${item.item_id}')">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `).join('');
+
+  } catch (error) {
+    console.error(error);
+    document.getElementById("itemTableBody").innerHTML = `
+      <tr>
+        <td colspan="7" style="text-align:center;padding:30px;color:red">
+          Failed to load items
+        </td>
+      </tr>`;
+  }
 }
+
+function searchItem() {
+  let input = document.getElementById("searchInput").value.toLowerCase();
+  let rows = document.querySelectorAll("#itemTable tbody tr");
+  rows.forEach(row => {
+    let itemName = row.cells[1]?.innerText.toLowerCase() || '';
+    row.style.display = itemName.includes(input) ? "" : "none";
+  });
+}
+
+function deleteItem(button, itemId) {
+  if (confirm("Delete Item?")) {
+    button.closest("tr").remove();
+    // TODO: call DELETE /delete-item API if needed
+  }
+}
+
+// Load items when page opens
+loadItems();
 
 </script>
 
