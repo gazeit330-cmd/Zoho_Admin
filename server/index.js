@@ -9,6 +9,18 @@ require('dotenv').config();
 
 const expressApp = express();
 
+expressApp.use((req, res, next) => {
+
+    res.removeHeader("X-Frame-Options");
+
+    res.setHeader(
+        "Content-Security-Policy",
+        "frame-ancestors 'self' https://creator.zoho.com https://*.zohocreator.com"
+    );
+
+    next();
+});
+
 expressApp.use(bodyParser.json());
 expressApp.use(bodyParser.urlencoded({ extended: false }));
 expressApp.use(morgan('dev'));
