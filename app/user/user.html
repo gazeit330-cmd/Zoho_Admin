@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZOHO KIOSK</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f3f4f6;
+}
+
+/* ===================================
+PAGE CONTROL
+=================================== */
+
+.page{
+    display:none;
+    min-height:100vh;
+}
+
+.active{
+    display:block;
+}
+
+/* ===================================
+WELCOME PAGE
+=================================== */
+
+.welcome-header{
+    background:linear-gradient(90deg,#0f172a,#111827);
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.logo{
+    font-size:36px;
+    font-weight:700;
+}
+
+.logo span{
+    color:#FFD166;
+}
+
+.hero{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+    padding:50px;
+}
+
+.left-content h1{
+    font-size:60px;
+    margin-bottom:20px;
+    color:#111827;
+}
+
+.left-content h1 span{
+    color:#2e7d32;
+}
+
+.left-content p{
+    color:#666;
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.start-btn{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    padding:18px 30px;
+    border-radius:14px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.food-card{
+    background:white;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.food-card img{
+    width:100%;
+    border-radius:20px;
+}
+
+/* ===================================
+REGISTRATION PAGE
+=================================== */
+
+.register-wrapper{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.register-card{
+    width:100%;
+    max-width:600px;
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.register-title{
+    text-align:center;
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.register-subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.form-group input{
+    width:100%;
+    height:55px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:0 15px;
+}
+
+.continue-btn{
+    width:100%;
+    height:60px;
+    border:none;
+    background:#2e7d32;
+    color:white;
+    border-radius:14px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* ===================================
+MENU PAGE
+=================================== */
+
+.header{
+    background:linear-gradient(90deg,#000000,#1c1c1c);
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+.header-content h1{
+    font-size:30px;
+}
+
+.header-content p{
+    color:#FFD166;
+}
+
+.search-box{
+    padding:20px;
+    text-align:center;
+}
+
+.search-box input{
+    width:100%;
+    max-width:500px;
+    height:50px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    padding:0 15px;
+    font-size:16px;
+}
+
+.tabs{
+    display:flex;
+    gap:10px;
+    padding:15px;
+    flex-wrap:wrap;
+}
+
+.tab{
+    flex:1;
+    min-width:120px;
+    padding:14px;
+    border-radius:12px;
+    color:white;
+    text-align:center;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.green{background:#6ab04c;}
+.orange{background:#f0932b;}
+.pink{background:#eb4d4b;}
+.purple{background:#8e44ad;}
+
+.grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    padding:25px;
+}
+
+.card{
+    background:white;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 5px 18px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+}
+
+.food-name{
+    font-size:24px;
+    font-weight:700;
+    padding:15px 15px 0;
+}
+
+.food-desc{
+    color:#666;
+    padding:8px 15px;
+}
+
+.food-price{
+    padding:0 15px;
+    color:#2e7d32;
+    font-size:24px;
+    font-weight:700;
+}
+
+.quantity-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    padding:20px;
+}
+
+.qty-btn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:12px;
+    background:#2e7d32;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.quantity-number{
+    font-size:20px;
+    font-weight:700;
+}
+
+.footer{
+    padding:20px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    position:relative;
+}
+.footer-btn{
+    padding:14px 22px;
+    border:none;
+    border-radius:12px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.home-btn{
+    background:#111827;
+    color:white;
+}
+
+.cart-btn{
+    background:#2e7d32;
+    color:white;
+}
+
+/* CART PAGE */
+
+.cart-item{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.cart-item img{
+    width:120px;
+    height:100px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+/* CHECKOUT */
+
+.container{
+    display:flex;
+    gap:20px;
+    padding:25px;
+}
+
+.left{
+    flex:2;
+}
+
+.right{
+    flex:1;
+}
+
+.bill{
+    position:sticky;
+    top:20px;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+}
+
+.bill-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.total{
+    font-size:24px;
+    font-weight:700;
+}
+
+.place-btn{
+    width:100%;
+    height:60px;
+    border:none;
+    background:#2e7d32;
+    color:white;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+select{
+    width:100%;
+    height:50px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    padding:0 12px;
+}
+
+
+
+/* ADDON */
+
+.addon-menu{
+    display:none;
+    position:absolute;
+    bottom:80px;
+    left:50%;
+    transform:translateX(-50%);
+    width:280px;
+    background:white;
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    padding:15px;
+    z-index:999;
+    animation:popup 0.25s ease;
+}
+
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:translateX(-50%) translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(-50%) translateY(0);
+    }
+}
+
+.addon-item{
+    padding:14px;
+    border-bottom:1px solid #eee;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.addon-item:last-child{
+    border-bottom:none;
+}
+
+.addon-item:hover{
+    background:#f3f4f6;
+}
+/* SUCCESS PAGE */
+
+.success-page{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.receipt{
+    width:100%;
+    max-width:700px;
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.receipt-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.success-btn{
+    width:100%;
+    height:55px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    border-radius:12px;
+    margin-top:25px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero{
+    grid-template-columns:1fr;
+    padding:20px;
+}
+
+.left-content h1{
+    font-size:40px;
+}
+
+.grid{
+    grid-template-columns:1fr;
+}
+
+.container{
+    flex-direction:column;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- WELCOME PAGE -->
+
+<div id="welcomePage" class="page active">
+
+<div class="welcome-header">
+
+<div class="logo">
+🍴 ZOHO <span>KIOSK</span>
+</div>
+
+</div>
+
+<div class="hero">
+
+<div class="left-content">
+
+<h1>
+Ultimate Dining <span>Experience</span>
+</h1>
+
+<p>
+Enjoy restaurant-style ordering with a modern self-service kiosk experience.
+</p>
+
+<button class="start-btn"
+onclick="goToRegistration()">
+Start Ordering
+</button>
+
+</div>
+
+<div class="food-card">
+
+<img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- REGISTRATION PAGE -->
+
+<div id="registrationPage" class="page">
+
+<div class="register-wrapper">
+
+<div class="register-card">
+
+<div class="register-title">
+Customer Registration
+</div>
+
+<div class="register-subtitle">
+Fill your details to continue
+</div>
+
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" id="fullName">
+</div>
+
+<div class="form-group">
+<label>Phone Number</label>
+<input type="text" id="phoneNumber">
+</div>
+
+<div class="form-group">
+<label>Email Address</label>
+<input type="email" id="emailAddress">
+</div>
+
+<button class="continue-btn"
+onclick="registerCustomer()">
+Register & Continue
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MENU PAGE -->
+
+<div id="menuPage" class="page">
+
+<div class="header">
+
+<div class="header-content">
+
+<h1>🍴 ZOHO KIOSK</h1>
+
+<p>Welcome to Delicious Bites</p>
+
+</div>
+
+</div>
+
+<div class="search-box">
+
+<input 
+type="text"
+id="searchInput"
+placeholder="Search food..."
+onkeyup="searchFood()">
+
+</div>
+
+<div class="tabs">
+
+<div class="tab green"
+onclick="filterCategory('starter')">
+STARTERS
+</div>
+
+<div class="tab orange"
+onclick="filterCategory('main')">
+MAIN COURSE
+</div>
+
+<div class="tab pink"
+onclick="filterCategory('dessert')">
+DESSERTS
+</div>
+
+<div class="tab purple"
+onclick="filterCategory('beverage')">
+BEVERAGES
+</div>
+
+<div class="tab"
+style="background:#111827;"
+onclick="filterCategory('all')">
+ALL
+</div>
+
+</div>
+
+<div class="grid" id="menuGrid">
+  <div style="text-align:center;padding:40px;width:100%">
+    Loading menu...
+  </div>
+</div>
+
+<div class="footer">
+
+<button class="footer-btn home-btn"
+onclick="goToWelcome()">
+🏠 Home
+</button>
+
+<button class="footer-btn cart-btn cart-count"
+onclick="goToCheckout()">
+🛒 View Cart (0)
+</button>
+
+</div>
+
+</div>
+
+<!-- CHECKOUT PAGE -->
+
+<div id="checkoutPage" class="page">
+
+<div class="header">
+<h1>Checkout Summary</h1>
+</div>
+
+<div class="container">
+
+<div class="left">
+<div id="checkoutItems"></div>
+</div>
+
+<div class="right">
+
+<div class="bill">
+
+<h2>Bill Details</h2>
+
+<br>
+
+<div class="bill-row">
+<span>Item Total</span>
+<span id="itemTotal">₹0</span>
+</div>
+
+<div class="bill-row">
+<span>GST (5%)</span>
+<span id="gstAmount">₹0</span>
+</div>
+
+<div class="bill-row">
+<span>Service Fee</span>
+<span id="serviceFee">₹25</span>
+</div>
+
+<hr style="margin:15px 0;">
+
+<div class="bill-row total">
+<span>Total</span>
+<span id="checkoutTotal">₹0</span>
+</div>
+
+<br>
+
+<h3>Order Type</h3>
+
+<br>
+
+<select id="orderType">
+
+<option>Dine In</option>
+<option>Take Away</option>
+
+</select>
+
+<br><br>
+
+<h3>Payment Method</h3>
+
+<br>
+
+<select id="paymentMethod">
+
+<option>Cash</option>
+<option>UPI</option>
+<option>Card</option>
+
+</select>
+
+<br><br>
+
+<button class="place-btn"
+onclick="placeOrder()">
+
+Place Order
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="addon-menu" id="addonMenu">
+
+<div class="addon-item"
+onclick="addAddon('Extra Cheese',40)">
+🧀 Extra Cheese - ₹40
+</div>
+
+<div class="addon-item"
+onclick="addAddon('Cold Drink',90)">
+🥤 Cold Drink - ₹90
+</div>
+
+</div>
+
+<div class="footer">
+
+<button class="footer-btn home-btn"
+onclick="goToMenu()">
+⬅ Back
+</button>
+
+<button class="footer-btn cart-btn"
+onclick="toggleAddonMenu()">
+➕ Add On
+</button>
+
+</div>
+
+</div>
+
+<!-- SUCCESS PAGE -->
+
+<div id="successPage" class="page">
+
+<div class="success-page">
+
+<div class="receipt">
+
+<h1 style="
+font-size:40px;
+text-align:center;
+color:#2e7d32;
+margin-bottom:10px;">
+✅ Order Successful
+</h1>
+
+<p style="
+text-align:center;
+color:#666;
+margin-bottom:25px;">
+Thank you for ordering with
+ZOHO KIOSK
+</p>
+
+<div class="receipt-item">
+<span>Customer</span>
+<span id="customerName"></span>
+</div>
+
+<div class="receipt-item">
+<span>Phone</span>
+<span id="customerPhone"></span>
+</div>
+
+<div class="receipt-item">
+<span>Order ID</span>
+<span id="orderId"></span>
+</div>
+
+<div class="receipt-item">
+<span>Payment</span>
+<span id="paymentMethodText"></span>
+</div>
+
+<div class="receipt-item">
+<span>Order Type</span>
+<span id="orderTypeText"></span>
+</div>
+
+<hr style="margin:20px 0;">
+
+<div id="itemList"></div>
+
+<hr style="margin:20px 0;">
+
+<div class="receipt-item">
+<b>Total</b>
+<b id="totalAmount"></b>
+</div>
+
+<button class="success-btn"
+onclick="goToWelcome()">
+Back To Home
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+
+const API = "https://kiosk-50043069973.catalystappsail.in";
+
+async function loadMenu() {
+  try {
+    const response = await fetch(`${API}/get-items`);
+    const data = await response.json();
+    const items = data.items || [];
+
+    const grid = document.getElementById("menuGrid");
+
+    const activeItems = items.filter(i => i.status === "active");
+
+    if (activeItems.length === 0) {
+      grid.innerHTML = `<p style="text-align:center;padding:40px">No items available</p>`;
+      return;
+    }
+
+    grid.innerHTML = activeItems.map(item => `
+      <div class="card"
+        data-name="${item.name.toLowerCase()}"
+        data-category="main">
+
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
+          onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4'">
+
+        <div class="food-name">${item.name}</div>
+
+        <div class="food-desc">${item.description || 'Delicious item'}</div>
+
+        <div class="food-price">₹${item.rate}</div>
+
+        <div class="quantity-box">
+          <button class="qty-btn"
+            onclick="decreaseQuantity(this)">-</button>
+          <div class="quantity-number">0</div>
+          <button class="qty-btn"
+            onclick="increaseQuantity(this)">+</button>
+        </div>
+
+      </div>
+    `).join('');
+
+  } catch (error) {
+    console.error(error);
+    document.getElementById("menuGrid").innerHTML =
+      `<p style="text-align:center;padding:40px;color:red">Failed to load menu</p>`;
+  }
+}
+
+
+
+
+let cart = [];
+
+
+// Item Master Mapping (Zoho Books Item Name -> Item ID)
+
+const itemMaster = [
+  { item_name: "Orange Juice", item_id: "3838512000000497009" },
+  { item_name: "Cold Coffee", item_id: "3838512000000509002" },
+  { item_name: "Brownie", item_id: "3838512000000517019" },
+  { item_name: "Ice Cream", item_id: "3838512000000515029" },
+  { item_name: "Pasta Alfredo", item_id: "3838512000000496019" },
+  { item_name: "Margherita Pizza", item_id: "3838512000000515020" },
+  { item_name: "Veg Burger", item_id: "3838512000000500009" },
+  { item_name: "Paneer Tikka", item_id: "3838512000000519010" },
+  { item_name: "Chocolate Cake", item_id: "3838512000000515011" },
+  { item_name: "Garlic Bread", item_id: "3838512000000513016" },
+  { item_name: "French Fries", item_id: "3838512000000518021" }
+];
+
+
+
+
+function hideAllPages()
+{
+    document.querySelectorAll(".page")
+    .forEach(page=>{
+        page.style.display="none";
+    });
+}
+
+function showPage(id)
+{
+    hideAllPages();
+    document.getElementById(id).style.display="block";
+}
+
+function goToWelcome()
+{
+    showPage("welcomePage");
+}
+
+function goToRegistration()
+{
+    showPage("registrationPage");
+}
+
+function goToMenu() {
+    showPage("menuPage");
+    loadMenu();
+}
+
+function goToCheckout()
+{
+    renderCheckout();
+    showPage("checkoutPage");
+}
+
+function registerCustomer()
+{
+    let customerData={
+        name:document.getElementById("fullName").value,
+        phone:document.getElementById("phoneNumber").value,
+        email:document.getElementById("emailAddress").value
+    };
+
+    sessionStorage.setItem(
+        "customerData",
+        JSON.stringify(customerData)
+    );
+
+    showPage("menuPage");
+     loadMenu();
+}
+
+function increaseQuantity(button)
+{
+    let card = button.closest(".card");
+
+    let qtyElement =
+    card.querySelector(".quantity-number");
+
+    let qty =
+    parseInt(qtyElement.innerText);
+
+    qty++;
+
+    qtyElement.innerText = qty;
+
+    let item = {
+
+        name:
+        card.querySelector(".food-name").innerText,
+
+        description:
+        card.querySelector(".food-desc").innerText,
+
+        price:
+        parseInt(
+            card.querySelector(".food-price")
+            .innerText.replace("₹","")
+        ),
+
+        image:
+        card.querySelector("img").src,
+
+        quantity:qty
+    };
+
+    let existing =
+    cart.find(i=>i.name===item.name);
+
+    if(existing)
+    {
+        existing.quantity = qty;
+    }
+    else
+    {
+        cart.push(item);
+    }
+
+    updateCartCount();
+}
+
+function decreaseQuantity(button)
+{
+    let card = button.closest(".card");
+
+    let qtyElement =
+    card.querySelector(".quantity-number");
+
+    let qty =
+    parseInt(qtyElement.innerText);
+
+    if(qty>0)
+    {
+        qty--;
+    }
+
+    qtyElement.innerText = qty;
+
+    let name =
+    card.querySelector(".food-name").innerText;
+
+    cart.forEach(item=>{
+
+        if(item.name===name)
+        {
+            item.quantity=qty;
+        }
+
+    });
+
+    cart =
+    cart.filter(item=>item.quantity>0);
+
+    updateCartCount();
+}
+
+function updateCartCount()
+{
+    let total = 0;
+
+    cart.forEach(item=>{
+        total += item.quantity;
+    });
+
+    document.querySelector(".cart-count")
+    .innerText =
+    "🛒 View Cart ("+total+")";
+}
+
+function searchFood()
+{
+    let input =
+    document.getElementById("searchInput")
+    .value.toLowerCase();
+
+    document.querySelectorAll(".card")
+    .forEach(card=>{
+
+        let name =
+        card.getAttribute("data-name");
+
+        if(name.includes(input))
+        {
+            card.style.display="block";
+        }
+        else
+        {
+            card.style.display="none";
+        }
+
+    });
+}
+
+function filterCategory(category)
+{
+    document.querySelectorAll(".card")
+    .forEach(card=>{
+
+        let cat =
+        card.getAttribute("data-category");
+
+        if(category==="all")
+        {
+            card.style.display="block";
+        }
+        else if(cat===category)
+        {
+            card.style.display="block";
+        }
+        else
+        {
+            card.style.display="none";
+        }
+
+    });
+}
+
+function renderCheckout()
+{
+    let container =
+    document.getElementById("checkoutItems");
+
+    container.innerHTML="";
+
+    let itemTotal=0;
+
+    cart.forEach(item=>{
+
+        itemTotal +=
+        item.price * item.quantity;
+
+        container.innerHTML += `
+
+        <div class="cart-item">
+
+            <img src="${item.image}">
+
+            <div>
+
+                <h2>${item.name}</h2>
+
+                <p>${item.description}</p>
+
+                <h3>
+                    ₹${item.price}
+                </h3>
+
+                <div class="quantity-box">
+
+                    <button class="qty-btn"
+                    onclick="checkoutDecrease('${item.name}')">
+                    -
+                    </button>
+
+                    <div class="quantity-number">
+                    ${item.quantity}
+                    </div>
+
+                    <button class="qty-btn"
+                    onclick="checkoutIncrease('${item.name}')">
+                    +
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+    let gst =
+    Math.round(itemTotal * 0.05);
+
+    let serviceFee =
+    itemTotal>0 ? 25 : 0;
+
+    let grandTotal =
+    itemTotal + gst + serviceFee;
+
+    document.getElementById("itemTotal")
+    .innerText = "₹"+itemTotal;
+
+    document.getElementById("gstAmount")
+    .innerText = "₹"+gst;
+
+    document.getElementById("serviceFee")
+    .innerText = "₹"+serviceFee;
+
+    document.getElementById("checkoutTotal")
+    .innerText = "₹"+grandTotal;
+}
+
+function checkoutIncrease(name)
+{
+    cart.forEach(item=>{
+
+        if(item.name===name)
+        {
+            item.quantity++;
+        }
+
+    });
+
+    syncMenu();
+    renderCheckout();
+    updateCartCount();
+}
+
+function checkoutDecrease(name)
+{
+    cart.forEach(item=>{
+
+        if(item.name===name &&
+           item.quantity>0)
+        {
+            item.quantity--;
+        }
+
+    });
+
+    cart =
+    cart.filter(item=>item.quantity>0);
+
+    syncMenu();
+    renderCheckout();
+    updateCartCount();
+}
+
+function syncMenu()
+{
+    document.querySelectorAll(".card")
+    .forEach(card=>{
+
+        let name =
+        card.querySelector(".food-name")
+        .innerText;
+
+        let qty =
+        card.querySelector(".quantity-number");
+
+        let item =
+        cart.find(i=>i.name===name);
+
+        if(item)
+        {
+            qty.innerText =
+            item.quantity;
+        }
+        else
+        {
+            qty.innerText = 0;
+        }
+
+    });
+}
+
+function toggleAddonMenu()
+{
+    let menu =
+    document.getElementById("addonMenu");
+
+    if(menu.style.display==="block")
+    {
+        menu.style.display="none";
+    }
+    else
+    {
+        menu.style.display="block";
+    }
+}
+
+function addAddon(name,price)
+{
+    let existing =
+    cart.find(i=>i.name===name);
+
+    if(existing)
+    {
+        existing.quantity++;
+    }
+    else
+    {
+        cart.push({
+
+            name:name,
+            description:"Addon Item",
+            price:price,
+            image:"",
+            quantity:1
+
+        });
+    }
+
+    renderCheckout();
+    updateCartCount();
+
+    document.getElementById("addonMenu")
+    .style.display="none";
+}
+
+
+// Map cart items to Zoho Books line_items format
+function placeOrder()
+{
+   const line_items = cart.map(item => {
+    const matchedItem = itemMaster.find(
+        master => master.item_name === item.name
+    );
+
+    return {
+        item_id: matchedItem ? matchedItem.item_id : "",
+        name: item.name,
+        quantity: item.quantity
+    };
+});
+
+console.log(line_items);
+
+    let customerData =
+    JSON.parse(
+        sessionStorage.getItem("customerData")
+    );
+
+    let total = 0;
+
+    cart.forEach(item=>{
+        total += item.price * item.quantity;
+    });
+
+    let order = {
+
+        customerName:
+        customerData.name,
+
+        customerPhone:
+        customerData.phone,
+
+        orderId:
+        "ZK"+Math.floor(Math.random()*100000),
+
+        paymentMethod:
+        document.getElementById("paymentMethod").value,
+
+        orderType:
+        document.getElementById("orderType").value,
+
+        grandTotal:
+        "₹"+total,
+
+        items:cart
+
+    };
+
+    sessionStorage.setItem(
+        "latestOrder",
+        JSON.stringify(order)
+    );
+
+    loadReceipt();
+
+    showPage("successPage");
+}
+
+function loadReceipt()
+{
+    let data =
+    JSON.parse(
+        sessionStorage.getItem("latestOrder")
+    );
+
+    document.getElementById("customerName")
+    .innerText = data.customerName;
+
+    document.getElementById("customerPhone")
+    .innerText = data.customerPhone;
+
+    document.getElementById("orderId")
+    .innerText = data.orderId;
+
+    document.getElementById("paymentMethodText")
+    .innerText = data.paymentMethod;
+
+    document.getElementById("orderTypeText")
+    .innerText = data.orderType;
+
+    document.getElementById("totalAmount")
+    .innerText = data.grandTotal;
+
+    let itemList =
+    document.getElementById("itemList");
+
+    itemList.innerHTML="";
+
+    data.items.forEach(item=>{
+
+        itemList.innerHTML += `
+
+        <div class="receipt-item">
+
+            <span>
+            ${item.name}
+            x ${item.quantity}
+            </span>
+
+            <span>
+            ₹${item.price * item.quantity}
+            </span>
+
+        </div>
+
+        `;
+    });
+}
+
+
+
+</script>
+
+</body>
+</html>
