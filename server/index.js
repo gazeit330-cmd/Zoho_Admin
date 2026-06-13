@@ -10,14 +10,11 @@ require('dotenv').config();
 const expressApp = express();
 
 expressApp.use((req, res, next) => {
-
     res.removeHeader("X-Frame-Options");
-
     res.setHeader(
         "Content-Security-Policy",
-        "frame-ancestors 'self' https://creator.zoho.com https://*.zohocreator.com"
+        "frame-ancestors *"
     );
-
     next();
 });
 
